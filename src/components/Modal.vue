@@ -61,7 +61,7 @@ export default {
           });
           this.loading = false
           this.$emit('close-modal')
-          // location.reload();
+          location.reload();
         } catch (error) {      
           this.loading = false
           this.$toast.error(`${this.city} does not exist, please try again`, {
@@ -93,7 +93,7 @@ export default {
   label {
     color: #fff;
   }
-
+  
   .modal-wrap {
     max-width: 500px;
     border-radius: 8px;
