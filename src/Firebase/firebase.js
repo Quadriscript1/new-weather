@@ -1,10 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyAqfZ9vm7O2EHwbcFzI63W6BXbPs8XOBeE",
-  authDomain: "my-weather-90e84.firebaseapp.com",
-  projectId: "my-weather-90e84",
-  storageBucket: "my-weather-90e84.appspot.com",
-  messagingSenderId: "373406646903",
-  appId: "1:373406646903:web:89c8fcf9346d48c310fc72"
+  apiKey: "AIzaSyBhOqICLXm7HnrXLAdAuYS242LmdANhFu8",
+  authDomain: "weather-app-1ca6d.firebaseapp.com",
+  projectId: "weather-app-1ca6d",
+  storageBucket: "weather-app-1ca6d.appspot.com",
+  messagingSenderId: "1008300354742",
+  appId: "1:1008300354742:web:6eeb964d6ed42922578a17",
+  measurementId: "G-2E2SLLE0J8"
 };
 
 

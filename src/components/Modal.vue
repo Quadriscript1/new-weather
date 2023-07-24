@@ -1,5 +1,6 @@
 <template>
   <div @click="closeModal" class="modal" ref="modal">
+    <vue-element-loading :active="loading" spinner="bar-fade-scale" />
     <div class="modal-wrap" ref="modalWrap">
       <label for="city-name">Enter Location:</label>
       <input type="text" name="city-name" placeholder="Search By City Name" v-model="city">
@@ -13,7 +14,6 @@ import axios from 'axios';
 import firebaseConfig from "../Firebase/firebase"
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export default {
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       city: '',
+      loading:false,
     }
   },
   mounted() {
@@ -35,12 +36,18 @@ export default {
 
     },
     async addCity() {
+      this.loading = true
       const collectionRef = collection(db, 'cities');
       if (this.city === "") {
         alert("field can't be empty")
       }
       else if (this.cities.some((res) => res.city === this.city.toLowerCase())) {
-        alert(`${this.city} already exists`)
+        this.$toast.error(`${this.city} already exists`, {
+              timeout: 3000,
+              position:'top-right',
+              closeOnClick: true,
+          });
+        this.loading = false
       }
       else {
         try {
@@ -52,11 +59,19 @@ export default {
             city: this.city.toLocaleLowerCase(),
             currentWeather: data
           });
+          this.loading = false
           this.$emit('close-modal')
-        } catch {
-          alert(`${this.city} does not exist, please try again`)
+          // location.reload();
+        } catch (error) {      
+          this.loading = false
+          this.$toast.error(`${this.city} does not exist, please try again`, {
+              timeout: 1000,
+              position:'top-right',
+              closeOnClick: true,
+          });
+          // alert(`${this.city} does not exist, please try again`)
+          this.loading = false
         }
-
       }
     },
 
