@@ -13,6 +13,7 @@
       <audio autoplay="autoplay">
         <source src="../../public/peru.mp3" />     
       </audio>
+      
     </div>
   </div>
 </template>
