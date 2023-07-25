@@ -1,9 +1,9 @@
 <template>
   <div class="main">
-    <div v-if="isLoading" class="loading">
-
-    </div>
-    <div v-else id="app">
+    <!-- <div v-if="isLoading" class="loading">
+    </div> -->
+    <div id="app">
+      <vue-element-loading :active="loading" spinner="bar-fade-scale" />
       <Modal v-if="modalOpen" v-on:close-modal="toggleModal" :APIkey="APIkey" :cities="cities" />
       <navigationApp v-on:add-city="toggleModal" v-on:edit-city="toggleEdit" :addCityActive="addCityActive" :isDay="isDay"
         :isNight="isNight" />
@@ -46,7 +46,8 @@ export default {
       modalOpen: null,
       edit: null,
       addCityActive: null,
-      isLoading: true
+      isLoading: true,
+      loading:false,
     };
   },
   components: {
@@ -64,6 +65,7 @@ export default {
       this.cities = citySnapshot.docs.map(doc => doc.data());
     },
     getCityWeather() {
+      this.loading = true
       const citiesCollection = collection(db, 'cities');
       onSnapshot(citiesCollection, async (snapshot) => {
         if (snapshot.docs.length === 0) {
@@ -85,11 +87,14 @@ export default {
               });
               this.weather.push(cityData);
               this.isLoading = false
+              this.loading = false
 
             } catch (error) {
+              this.loading = false
               console.log(error);
             }
           } else if (change.type === 'added' && change.doc.Nd) {
+            this.loading = false
             const cityData = change.doc.data();
             this.weather.push(cityData);
           } else if (change.type === 'removed') {

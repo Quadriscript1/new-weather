@@ -1,11 +1,13 @@
 <template>
   <div>
+      <audio autoplay="autoplay" loop>
+        <source src="../../public/sherubaown.mp3" />     
+      </audio>
     <div v-if="weather.length === 0" class="no-cities">
       <p>No cities added, add a new city.</p>
       <button @click="addCity">Add city</button>
     </div>
     <div class="grid">
-
       <div class="city-link" v-for="(city, index) in weather" :key="index">
         <bigCity :city="city" :edit="edit" />
       </div>

@@ -10,9 +10,7 @@
     <div class="video">
       <video :src="require(`../../public/videos/${this.city.currentWeather.weather[0].icon}.mp4`)"></video>
       <div class="bg-overlay"></div>
-      <audio autoplay="autoplay" controls loop>
-        <source src="../../public/sherubaown.mp3" />     
-      </audio>
+
       
     </div>
   </div>
