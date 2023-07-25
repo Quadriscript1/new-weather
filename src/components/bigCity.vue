@@ -1,4 +1,5 @@
 <template>
+  
   <div @click="goToWeather" class="city">
     <i v-if="edit" @click="removeCity" class="fas fa-trash-alt edit" ref="edit "></i>
     <span>{{ city.city }}</span>
@@ -9,6 +10,9 @@
     <div class="video">
       <video :src="require(`../../public/videos/${this.city.currentWeather.weather[0].icon}.mp4`)"></video>
       <div class="bg-overlay"></div>
+      <audio autoplay="autoplay">
+        <source src="../../public/peru.mp3" />     
+      </audio>
     </div>
   </div>
 </template>

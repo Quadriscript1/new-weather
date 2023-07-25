@@ -5,6 +5,7 @@
       <button @click="addCity">Add city</button>
     </div>
     <div class="grid">
+
       <div class="city-link" v-for="(city, index) in weather" :key="index">
         <bigCity :city="city" :edit="edit" />
       </div>
