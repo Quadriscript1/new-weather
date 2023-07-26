@@ -70,6 +70,7 @@ export default {
       onSnapshot(citiesCollection, async (snapshot) => {
         if (snapshot.docs.length === 0) {
           this.isLoading = false
+          this.loading = false
         }
         snapshot.docChanges().forEach(async (change) => {
           // console.log(change);
@@ -98,6 +99,7 @@ export default {
             const cityData = change.doc.data();
             this.weather.push(cityData);
           } else if (change.type === 'removed') {
+            this.loading = false
             const cityData = change.doc.data();
             this.weather = this.weather.filter(city => city.city !== cityData.city)
           }
